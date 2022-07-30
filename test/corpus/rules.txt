@@ -1,0 +1,22 @@
+=====
+Rules
+=====
+
+head_pred(a, B) :-
+  sub_1 &
+  sub_2
+
+---
+
+(code
+  (rule
+    head: (literal
+            predicate: (constant)
+            (literal_args
+              (constant)
+              (variable)))
+    (rule_body
+      (literal
+        predicate: (constant))
+      (literal
+        predicate: (constant)))))

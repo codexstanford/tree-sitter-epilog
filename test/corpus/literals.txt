@@ -1,0 +1,14 @@
+=====
+Literals
+=====
+
+head_pred(a, B)
+
+---
+
+(code
+  (literal
+    predicate: (constant)
+    (literal_args
+      (constant)
+      (variable))))
