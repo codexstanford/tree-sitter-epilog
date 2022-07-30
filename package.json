@@ -22,5 +22,11 @@
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.6"
-  }
+  },
+  "tree-sitter": [{
+    "scope": "source.epilog",
+    "file-types": [
+      "epilog"
+    ]
+  }]
 }
