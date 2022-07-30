@@ -4,6 +4,8 @@
   "description": "Tree-sitter grammar for Epilog",
   "main": "bindings/node",
   "scripts": {
+    "build": "tree-sitter generate",
+    "build-wasm": "tree-sitter build-wasm",
     "test": "tree-sitter test"
   },
   "keywords": [
@@ -12,8 +14,9 @@
     "parser",
     "tree-sitter"
   ],
-  "author": "",
-  "license": "MIT",
+  "repository": "https://github.com/codexstanford/tree-sitter-epilog",
+  "author": "William O'Hanley <wohanley@stanford.edu> (https://wohanley.com)",
+  "license": "UNLICENSED",
   "dependencies": {
     "nan": "^2.16.0"
   },
