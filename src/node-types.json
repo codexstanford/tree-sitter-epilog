@@ -8,6 +8,10 @@
       "required": false,
       "types": [
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "literal",
           "named": true
         },
@@ -19,7 +23,33 @@
     }
   },
   {
-    "type": "compound_expr",
+    "type": "compound",
+    "named": true,
+    "fields": {
+      "args": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "compound_args",
+            "named": true
+          }
+        ]
+      },
+      "constructor": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "constant",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "compound_args",
     "named": true,
     "fields": {},
     "children": {
@@ -27,11 +57,15 @@
       "required": true,
       "types": [
         {
-          "type": "compound_expr",
+          "type": "compound",
           "named": true
         },
         {
           "type": "constant",
+          "named": true
+        },
+        {
+          "type": "variable",
           "named": true
         }
       ]
@@ -41,6 +75,16 @@
     "type": "literal",
     "named": true,
     "fields": {
+      "args": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal_args",
+            "named": true
+          }
+        ]
+      },
       "predicate": {
         "multiple": false,
         "required": true,
@@ -57,7 +101,7 @@
       "required": false,
       "types": [
         {
-          "type": "literal_args",
+          "type": "op_negate",
           "named": true
         }
       ]
@@ -72,7 +116,7 @@
       "required": true,
       "types": [
         {
-          "type": "compound_expr",
+          "type": "compound",
           "named": true
         },
         {
@@ -90,6 +134,16 @@
     "type": "rule",
     "named": true,
     "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "rule_body",
+            "named": true
+          }
+        ]
+      },
       "head": {
         "multiple": false,
         "required": true,
@@ -100,16 +154,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "rule_body",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -157,11 +201,15 @@
     "named": false
   },
   {
+    "type": "comment",
+    "named": true
+  },
+  {
     "type": "constant",
     "named": true
   },
   {
-    "type": "~",
-    "named": false
+    "type": "op_negate",
+    "named": true
   }
 ]

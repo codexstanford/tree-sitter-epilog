@@ -8,11 +8,31 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "rule"
+            "name": "comment"
           },
           {
             "type": "SYMBOL",
             "name": "literal"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "rule"
+          }
+        ]
+      }
+    },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "%"
+          },
+          {
+            "type": "PATTERN",
+            "value": ".*"
           }
         ]
       }
@@ -24,8 +44,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "~"
+              "type": "SYMBOL",
+              "name": "op_negate"
             },
             {
               "type": "BLANK"
@@ -51,16 +71,20 @@
                   "value": "("
                 },
                 {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "literal_args"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
+                  "type": "FIELD",
+                  "name": "args",
+                  "content": {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "literal_args"
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  }
                 },
                 {
                   "type": "STRING",
@@ -74,6 +98,10 @@
           ]
         }
       ]
+    },
+    "op_negate": {
+      "type": "STRING",
+      "value": "~"
     },
     "literal_args": {
       "type": "SEQ",
@@ -119,8 +147,12 @@
             "value": ":-"
           },
           {
-            "type": "SYMBOL",
-            "name": "rule_body"
+            "type": "FIELD",
+            "name": "body",
+            "content": {
+              "type": "SYMBOL",
+              "name": "rule_body"
+            }
           }
         ]
       }
@@ -172,24 +204,54 @@
         },
         {
           "type": "SYMBOL",
-          "name": "compound_expr"
+          "name": "compound"
         }
       ]
     },
-    "compound_expr": {
+    "compound": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "constant"
+          "type": "FIELD",
+          "name": "constructor",
+          "content": {
+            "type": "SYMBOL",
+            "name": "constant"
+          }
         },
         {
           "type": "STRING",
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "_term"
+          "type": "FIELD",
+          "name": "args",
+          "content": {
+            "type": "SYMBOL",
+            "name": "compound_args"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "compound_args": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_term"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "variable"
+            }
+          ]
         },
         {
           "type": "REPEAT",
@@ -201,15 +263,20 @@
                 "value": ","
               },
               {
-                "type": "SYMBOL",
-                "name": "_term"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_term"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "variable"
+                  }
+                ]
               }
             ]
           }
-        },
-        {
-          "type": "STRING",
-          "value": ")"
         }
       ]
     },
@@ -222,7 +289,7 @@
       "value": 500,
       "content": {
         "type": "PATTERN",
-        "value": "[A-Z][a-z\\d_\\.]*"
+        "value": "[A-Z][A-Za-z\\d_\\.]*"
       }
     },
     "string": {

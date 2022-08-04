@@ -1,6 +1,66 @@
-=====
-Literals
-=====
+===
+Constants: Allowed characters
+===
+
+abc_123_..._.
+
+---
+
+(code
+  (literal
+    predicate: (constant)))
+
+===
+Variables: Allowed characters
+===
+
+pred(Boo_Boo123.g)
+
+---
+
+(code
+  (literal
+    predicate: (constant)
+    args: (literal_args
+            (variable))))
+
+===
+Negation
+===
+
+~pred
+~pred(a)
+
+---
+
+(code
+  (literal
+    (op_negate)
+    predicate: (constant))
+  (literal
+    (op_negate)
+    predicate: (constant)
+    args: (literal_args
+            (constant))))
+
+===
+No args
+===
+
+pred
+pred()
+
+---
+
+(code
+  (literal
+    predicate: (constant))
+  (literal
+    predicate: (constant)))
+
+===
+Constant and variable args
+===
 
 head_pred(a, B)
 
@@ -9,6 +69,24 @@ head_pred(a, B)
 (code
   (literal
     predicate: (constant)
-    (literal_args
-      (constant)
-      (variable))))
+    args: (literal_args
+            (constant)
+            (variable))))
+
+===
+Compound args
+===
+
+p(q(a,B))
+
+---
+
+(code
+  (literal
+    predicate: (constant)
+    args: (literal_args
+            (compound
+              constructor: (constant)
+              args: (compound_args
+                      (constant)
+                      (variable))))))

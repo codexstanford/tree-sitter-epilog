@@ -2,9 +2,7 @@
 Rules
 =====
 
-head_pred(a, B) :-
-  sub_1 &
-  sub_2
+head_pred(a, B) :- sub_1 & sub_2
 
 ---
 
@@ -12,11 +10,11 @@ head_pred(a, B) :-
   (rule
     head: (literal
             predicate: (constant)
-            (literal_args
-              (constant)
-              (variable)))
-    (rule_body
-      (literal
-        predicate: (constant))
-      (literal
-        predicate: (constant)))))
+            args: (literal_args
+                    (constant)
+                    (variable)))
+    body: (rule_body
+            (literal
+              predicate: (constant))
+            (literal
+              predicate: (constant)))))
