@@ -24,7 +24,11 @@ module.exports = grammar({
 
     _argument: $ => choice($._term, $.variable),
 
-    _term: $ => choice($.constant, $.compound),
+    _term: $ => choice($.constant, $.compound, $.list_literal, $.list_bang),
+
+    list_literal: $ => seq("[", optional(seq($._argument, repeat(seq(",", $._argument)))), "]"),
+
+    list_bang: $ => prec.right(-500, seq($._argument, repeat(seq("!", $._argument)))),
 
     compound: $ =>
       seq(
@@ -34,8 +38,8 @@ module.exports = grammar({
         ')'
       ),
 
-    compound_args: $ => seq(choice($._term, $.variable),
-                            repeat(seq(',', choice($._term, $.variable)))),
+    compound_args: $ => seq($._argument,
+                            repeat(seq(',', $._argument))),
 
     constant: $ => /[a-z\d_\.]+/,
 

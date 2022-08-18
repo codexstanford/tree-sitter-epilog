@@ -1,0 +1,82 @@
+===
+Basic list literals
+===
+
+p([], [x], [x,y])
+
+---
+
+(code
+  (literal
+    (constant)
+    (literal_args
+      (list_literal)
+      (list_literal
+        (constant))
+      (list_literal
+        (constant)
+        (constant)))))
+
+===
+Nested list literals
+===
+
+p([a, [b, [c, d], e]])
+
+---
+
+(code
+  (literal
+    (constant)
+    (literal_args
+      (list_literal
+        (constant)
+        (list_literal
+          (constant)
+          (list_literal
+            (constant)
+            (constant))
+          (constant))))))
+
+===
+Basic ! lists
+===
+
+p(x!nil, x!y!Tail)
+
+---
+
+(code
+  (literal
+    (constant)
+    (literal_args
+      (list_bang
+        (constant)
+        (constant))
+      (list_bang
+        (constant)
+        (constant)
+        (variable)))))
+
+===
+Nested literal and ! lists
+===
+
+p(a![b, [c, d!e!f]])
+
+---
+
+(code
+  (literal
+    (constant)
+    (literal_args
+      (list_bang
+        (constant)
+        (list_literal
+          (constant)
+          (list_literal
+            (constant)
+            (list_bang
+              (constant)
+              (constant)
+              (constant))))))))

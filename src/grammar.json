@@ -205,8 +205,91 @@
         {
           "type": "SYMBOL",
           "name": "compound"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "list_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "list_bang"
         }
       ]
+    },
+    "list_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_argument"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_argument"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "list_bang": {
+      "type": "PREC_RIGHT",
+      "value": -500,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_argument"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "!"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_argument"
+                }
+              ]
+            }
+          }
+        ]
+      }
     },
     "compound": {
       "type": "SEQ",
@@ -241,17 +324,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_term"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "variable"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_argument"
         },
         {
           "type": "REPEAT",
@@ -263,17 +337,8 @@
                 "value": ","
               },
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_term"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "variable"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_argument"
               }
             ]
           }
