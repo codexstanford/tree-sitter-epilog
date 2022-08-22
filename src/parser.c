@@ -297,7 +297,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 0:
       if (eof) ADVANCE(2);
       if (lookahead == '!') ADVANCE(12);
-      if (lookahead == '"') ADVANCE(15);
+      if (lookahead == '"') ADVANCE(16);
       if (lookahead == '%') ADVANCE(3);
       if (lookahead == '&') ADVANCE(9);
       if (lookahead == '(') ADVANCE(4);
@@ -306,16 +306,16 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ':') ADVANCE(1);
       if (lookahead == '[') ADVANCE(10);
       if (lookahead == ']') ADVANCE(11);
+      if (lookahead == '_') ADVANCE(13);
       if (lookahead == '~') ADVANCE(6);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') SKIP(0)
-      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(14);
+      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(15);
       if (lookahead == '.' ||
           ('0' <= lookahead && lookahead <= '9') ||
-          lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(13);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(14);
       END_STATE();
     case 1:
       if (lookahead == '-') ADVANCE(8);
@@ -357,20 +357,28 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 13:
       ACCEPT_TOKEN(sym_constant);
+      if (('A' <= lookahead && lookahead <= 'Z')) ADVANCE(15);
       if (lookahead == '.' ||
           ('0' <= lookahead && lookahead <= '9') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(13);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(14);
       END_STATE();
     case 14:
+      ACCEPT_TOKEN(sym_constant);
+      if (lookahead == '.' ||
+          ('0' <= lookahead && lookahead <= '9') ||
+          lookahead == '_' ||
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(14);
+      END_STATE();
+    case 15:
       ACCEPT_TOKEN(aux_sym_variable_token1);
       if (lookahead == '.' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
-          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(14);
+          ('a' <= lookahead && lookahead <= 'z')) ADVANCE(15);
       END_STATE();
-    case 15:
+    case 16:
       ACCEPT_TOKEN(anon_sym_DQUOTE);
       END_STATE();
     default:
@@ -908,7 +916,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [9] = {.entry = {.count = 1, .reusable = true}}, SHIFT(8),
   [11] = {.entry = {.count = 1, .reusable = true}}, SHIFT(13),
   [13] = {.entry = {.count = 1, .reusable = true}}, SHIFT(4),
-  [15] = {.entry = {.count = 1, .reusable = true}}, SHIFT(19),
+  [15] = {.entry = {.count = 1, .reusable = false}}, SHIFT(19),
   [17] = {.entry = {.count = 1, .reusable = true}}, SHIFT(33),
   [19] = {.entry = {.count = 1, .reusable = true}}, SHIFT(15),
   [21] = {.entry = {.count = 1, .reusable = true}}, SHIFT(29),

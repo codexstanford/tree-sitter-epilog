@@ -25,6 +25,20 @@ pred(Boo_Boo123.g)
             (variable))))
 
 ===
+Unused variables
+===
+
+pred(_Unused)
+
+---
+
+(code
+  (literal
+    predicate: (constant)
+    args: (literal_args
+            (variable))))
+
+===
 Negation
 ===
 

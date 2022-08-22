@@ -43,7 +43,7 @@ module.exports = grammar({
 
     constant: $ => /[a-z\d_\.]+/,
 
-    variable: $ => prec(500, /[A-Z][A-Za-z\d_\.]*/),
+    variable: $ => prec(500, /_?[A-Z][A-Za-z\d_\.]*/),
 
     // TODO escape quotes
     string: $ => seq('"', /[^"]+/, '"')

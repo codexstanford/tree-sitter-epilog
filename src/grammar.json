@@ -354,7 +354,7 @@
       "value": 500,
       "content": {
         "type": "PATTERN",
-        "value": "[A-Z][A-Za-z\\d_\\.]*"
+        "value": "_?[A-Z][A-Za-z\\d_\\.]*"
       }
     },
     "string": {
