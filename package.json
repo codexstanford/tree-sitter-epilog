@@ -1,5 +1,5 @@
 {
-  "name": "@codexstanford/tree-sitter-epilog",
+  "name": "@epilog/tree-sitter-epilog",
   "version": "0.1.0",
   "description": "Tree-sitter grammar for Epilog",
   "main": "bindings/node",
